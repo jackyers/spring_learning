@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/mavenTest</property>
+        <property name="user">root</property>
+        <property name="password">592678030111</property>
+        <!--
+            初始化的连接数量 在连接池里面初始化10个连接对象
+        -->
+        <property name="initialPoolSize">10</property>
+        <!--
+           最大空闲时间
+           某一个连接对象空闲时长最多是30s，超过了30s，该连接对象会被自动回收
+        -->
+        <property name="maxIdleTime">30</property>
+        <!--
+            最大连接数量
+            在连接池里面存在最多的连接数量
+        -->
+        <property name="maxPoolSize">100</property>
+        <!--
+           最小连接数量
+        -->
+        <property name="minPoolSize">10</property>
+    </default-config>
+</c3p0-config>

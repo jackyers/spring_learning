@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--默认通过set的方式进行依赖注入-->
+    <bean id="car" class="Pojo.Car">
+        <property name="brand" value="BMW"></property>
+    </bean>
+    <bean id="user" class="Pojo.User">
+        <property name="name" value="jack"></property>
+        <property name="age" value="18"></property>
+        <property name="password" value="123456"></property>
+        <property name="car" ref="car"></property>
+    </bean>
+
+    <!--使用构造函数进行依赖注入-->
+    <bean id="factory" class="Pojo.Factory">
+        <constructor-arg name="name" value="2号工厂"></constructor-arg>
+    </bean>
+    <bean id="plane" class="Pojo.plane">
+        <constructor-arg name="name" value="大黄蜂"></constructor-arg>
+        <constructor-arg name="brand" value="莱特"></constructor-arg>
+        <constructor-arg name="price" value="200"></constructor-arg>
+        <constructor-arg name="factory" ref="factory"></constructor-arg>
+    </bean>
+</beans>
