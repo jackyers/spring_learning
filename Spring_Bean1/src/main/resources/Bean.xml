@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--无参数构造函数实例化方式
+        Spring默认情况下都是单例Bean，可以通过scope标签修改
+        init-method和destroy-method可以指定容器初始化和销毁时Bean执行的方法-->
+    <bean id="userDao" class="Dao.UserDaoImpl" scope="singleton" init-method="init" destroy-method="destroy"></bean>
+
+    <!--实例化工厂管理Bean-->
+    <bean id="personFactory" class="Factory.PersonFactory"></bean>
+    <bean id="personDao" class="Dao.PersonDaoImpl" factory-bean="personFactory" factory-method="getPerson"></bean>
+
+    <!--静态实例化工厂管理Bean-->
+    <bean id="orderFactory" class="Factory.OrderFactory" factory-method="getOrder"></bean>
+</beans>
