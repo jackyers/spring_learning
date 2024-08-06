@@ -1,0 +1,10 @@
+server:
+  port: 7002
+
+#配置eureka服务端
+eureka:
+  client:
+    register-with-eureka: false #禁止自己注册自己
+    fetch-registry: false #禁止拉取注册中心的服务信息
+    service-url:
+      defaultZone: http://localhost:7001/eureka/ #eureka服务端的地址

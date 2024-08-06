@@ -1,0 +1,19 @@
+server:
+  port: 90 #服务端口号
+spring:
+  application:
+    name: service-consumer #配置服务提供方的名称
+eureka:
+  client:
+    register-with-eureka: true #允许当前服务注册到Eureka注册中心
+    fetch-registry: true #允许当前服务拉取注册中心的服务信息
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/ #Eureka注册中心的地址
+
+
+#先在配置类中定义日志输出级别，然后在消费方的配置文件配置日志
+logging:
+  level:
+    com.zyh.feign.PaymentFeignClient: debug
+
+
