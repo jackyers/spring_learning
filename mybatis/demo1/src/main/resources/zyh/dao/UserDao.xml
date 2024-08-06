@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是命名空间，值必须唯一，一般为接口的全限定名-->
+<mapper namespace="zyh.dao.UserDao">
+    <!--select标签是执行查询操作的标签
+        id是接口的方法名称
+        resultType描述接口的返回值类型
+        (如果接口的返回值为List或Set集合，那么这个属性值必为接口的泛型)-->
+    <select id="findAll" resultType="user">
+        select * from user
+    </select>
+</mapper>

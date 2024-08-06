@@ -1,0 +1,68 @@
+# k:(空格)v：表示一对键值对（空格必须有）；
+# 以缩进来控制层级关系；只要是左对齐的一列数据，都是同一个层级的；
+# 属性和值也是大小写敏感；
+# #表示注释；
+# 字符串无需加引号，如果要加，' '与" "表示字符串内容 会被 转义/不转义
+
+server:
+  port: 8888 #修改端口号
+uname: jack
+age: 18
+
+#给静态资源配置一个请求前缀
+#spring:
+#  mvc:
+#    static-path-pattern: /resource/**
+
+#定义复杂数据类型
+
+#定义对象方式1
+animal1:
+  name: Pop1
+  age: 2
+#定义对象方式2
+animal2: {name: Pop2,age: 3}
+
+#数组 List set 方式1
+pets1:
+- cat
+- dog
+- fish
+#数组 方式2
+pets2: {cat,dog,fish}
+#Map集合
+map1: {k1: v1,k2: v2}
+
+
+demo2:
+  name1: 'zhangsan \n jack' #会将\n进行转义
+  name2: "zhangsan \n jack" #不会转义
+
+person:
+  userName: zhangsan
+  boss: false
+  birth: 2019/12/12 20:12:33
+  age: 18
+  pet:
+    name: tomcat
+    weight: 23.4
+  interests: [篮球,游泳]
+  animal:
+    - jerry
+    - mario
+  score:
+    english:
+    first: 30
+    second: 40
+    third: 50
+    math: [131,140,148]
+    chinese: {first: 128,second: 136}
+    salarys: [3999,4999.98,5999.99]
+  allPets:
+    sick:
+      - {name: tom}
+      - {name: jerry,weight: 47}
+    health: [{name: mario,weight: 47}]
+
+
+

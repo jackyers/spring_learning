@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config
+3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--加载properties文件-->
+    <properties resource="db.properties"/>
+
+    <typeAliases>
+        <!--定义别名
+        type,是被给定别名类的全限定名，alias是自己取的别名-->
+<!--        <typeAlias type="zyh.pojo.User" alias="user"/>-->
+
+        <!--package,是需要去别名类所在的包路径，默认别名就是类名的小写-->
+        <package name="zyh.pojo"/>
+    </typeAliases>
+
+    <!--配置mybatis的环境-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--配置事务类型-->
+            <transactionManager type="JDBC"/>
+            <!--配置数据源POOLED和UNPOOLED-->
+            <dataSource type="POOLED">
+                <!--配置数据库连接的驱动、url、用户名、密码-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--在核心配置文件中导入接口的映射文件-->
+    <mappers>
+<!--        <mapper resource="zyh/dao/UserDao.xml"/>-->
+        <!--批量导入映射文件-->
+        <package name="zyh.dao"/>
+    </mappers>
+</configuration>
