@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="zyh.service.UserServiceImpl"/>
+    <bean id="myAspect" class="zyh.aspect.MyAspect"/>
+    <aop:config>
+<!--配置切点，
+    aop:pointcut即配置切点的标签；id表示切点的名称，唯一且自定义；
+    expression表示切点表达式;execution后面的是固定写法，即切点方法形参+包名.类名.方法名(参数类型)
+    * 表示切点方法的返回值类型任意
+    (..)表示切点方法的参数任意 -->
+        <aop:pointcut id="p1" expression="execution(* zyh.service.UserServiceImpl.deleteUser(..))"/>
+        <aop:pointcut id="p2" expression="execution(* zyh.service.UserServiceImpl.findAll(..))"/>
+        <aop:pointcut id="p3" expression="execution(* zyh.service.UserServiceImpl.updateUser(..))"/>
+        <aop:pointcut id="p4" expression="execution(* zyh.service.UserServiceImpl.addUser(..))"/>
+        <aop:pointcut id="p5" expression="execution(* zyh.service.UserServiceImpl.addUser(..))"/>
+    <!--配置代理对象，
+         aop:aspect即配置代理对象的标签
+        ref引用的是目标类的id-->
+        <aop:aspect ref="myAspect">
+    <!--配置前置通知
+        aop:before即配置前置通知的标签
+        method即增强方法的名称
+        pointcut-ref被通知织入的切点id-->
+            <aop:before method="checkPrivilege" pointcut-ref="p1"/>
+    <!--配置后置通知，方法前增强-->
+            <aop:after-returning method="printLog" pointcut-ref="p2"/>
+     <!--配置环绕通知，方法后增强-->
+            <aop:around method="around" pointcut-ref="p3"/>
+    <!--配置抛出异常通知，方法抛出异常时增强-->
+            <aop:after-throwing method="throwing" pointcut-ref="p4"/>
+    <!--配置最终通知，方法前后都增强，且不论是否有异常-->
+            <aop:after method="after" pointcut-ref="p5"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

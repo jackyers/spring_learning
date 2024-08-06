@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/rg56"/>
+        <property name="user" value="root"/>
+        <property name="password" value="592678030111"/>
+    </bean>
+
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype"/>
+    <!--如果构造QueryRunner时传入了一个连接池对象，以后每条语句都会从构造时传入的连接池中获取链接
+    对象，这样每条语句都有单独地连接对象就不能控制事务了。-->
+
+    <bean id="connectionUtils" class="zyh.utils.ConnectionUtils">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="zyh.utils.TransactionManager">
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <bean id="accountDao" class="zyh.dao.AccountDaoImpl">
+        <property name="runner" ref="runner"/>
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <bean id="accountService" class="zyh.service.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+    <bean id="beanFactory" class="zyh.factory.BeanFactory">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="accountService" ref="accountService"/>
+    </bean>
+
+    <bean id="proxy" factory-bean="beanFactory" factory-method="getAccountService"/>
+</beans>
